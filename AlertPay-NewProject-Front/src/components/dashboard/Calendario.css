@@ -1,0 +1,35 @@
+.rbc-calendar {
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.rbc-toolbar {
+  padding: 10px 20px;
+  border-bottom: 1px solid #ddd;
+}
+.rbc-toolbar .rbc-btn-group button {
+  border: 1px solid #ccc;
+  cursor: pointer;
+  padding: 6px 12px;
+  transition: background-color 0.2s;
+}
+.rbc-toolbar .rbc-btn-group button:hover {
+  background-color: #f0f0f0;
+}
+.rbc-toolbar .rbc-btn-group button.rbc-active {
+  background-color: #3b82f6; 
+  color: white;
+  border-color: #3b82f6;
+}
+
+/* Estiliza o título do mês */
+.rbc-toolbar-label {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+
+.rbc-event {
+  padding: 4px 8px;
+  border: none !important; 
+}

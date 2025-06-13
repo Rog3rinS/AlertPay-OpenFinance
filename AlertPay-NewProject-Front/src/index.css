@@ -1,0 +1,20 @@
+/* * {
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica;
+    box-sizing: border-box;
+    /* text-shadow: #000;  <---- somente se o texto não ficar legível    } */
+
+
+/* Arquivo: src/index.css */
+
+body {
+  margin: 0; /* Remove a margem padrão do navegador */
+  font-family: Helvetica, Arial, sans-serif; /* Define uma fonte padrão */
+  background-color: #f1f5f9; /* Um fundo cinza bem claro para o site */
+}
+
+/* Garante que o cálculo de tamanho dos elementos seja mais intuitivo */
+* {
+  box-sizing: border-box;
+}

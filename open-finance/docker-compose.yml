@@ -1,0 +1,95 @@
+services:
+  db:
+    image: postgres:16
+    container_name: open-finance-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: openfinance
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+      - ./data/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+  api-minibc:
+    build: ./APImini-BC/
+    image: openfinance-api-minibc
+    ports:
+      - "3002:3002"
+    depends_on:
+      - db
+    environment:
+      PORT: 3002
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASS: admin
+      DB_NAME: api_minibc_db
+    volumes:
+      - ./wait-for.sh:/wait-for.sh
+      - ./start.sh:/start.sh
+    entrypoint: ["sh", "/start.sh"]
+
+  bancocentral:
+    build: ./BancoCentral
+    image: openfinance-bancocentral
+    ports:
+      - "3003:3003"
+    depends_on:
+      - db
+    environment:
+      PORT: 3003
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASS: admin
+      DB_NAME: bancocentral_db
+    volumes:
+      - ./wait-for.sh:/wait-for.sh
+      - ./start.sh:/start.sh
+    entrypoint: ["sh", "/start.sh"]
+
+  bank-account-api:
+    build: ./bank-account-api
+    image: openfinance-bank-account-api
+    ports:
+      - "3004:3004"
+    depends_on:
+      - db
+    environment:
+      PORT: 3004
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASS: admin
+      DB_NAME: bank_account_db
+    volumes:
+      - ./wait-for.sh:/wait-for.sh
+      - ./start.sh:/start.sh
+    entrypoint: ["sh", "/start.sh"]
+
+  mini-banco-central:
+    build: ./mini-banco-central/
+    image: openfinance-mini-banco-central
+    ports:
+      - "3005:3005"
+    depends_on:
+      - db
+    environment:
+      PORT: 3005
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASS: admin
+      DB_NAME: mini_banco_central_db
+    volumes:
+      - ./wait-for.sh:/wait-for.sh
+      - ./start.sh:/start.sh
+    entrypoint: ["sh", "/start.sh"]
+
+networks:
+  default:
+    external:
+      name: openfinance-net

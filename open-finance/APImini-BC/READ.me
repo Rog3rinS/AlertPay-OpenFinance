@@ -1,0 +1,225 @@
+# 🏦 API mini BC
+
+API para simular operações bancárias simples com usuários, contas, instituições financeiras e transações.
+
+---
+
+## 📦 Tecnologias Utilizadas
+
+- Node.js
+- Express
+- Sequelize
+- PostgreSQL
+- Docker + Docker Compose
+- Yup (validação)
+
+---
+
+
+## 🚀 Como Executar
+
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/Kroth09/API-miniBC
+```
+
+### 2. Acesse a pasta do projeto BancoCentral
+
+```bash
+cd ChallengesCMPS/BancoCentra
+```
+
+### 3. Instale as dependências
+
+```bash
+npm install
+```
+
+### 4. Inicie o ambiente com Docker
+
+```bash
+sudo docker compose up -d
+```
+
+### 5. Rode as migration
+
+```bash
+npx sequelize-cli db:migrate
+```
+
+### 6. Execute o projeto usando o script
+
+```bash
+npm run dev
+```
+
+## 📘 Guia de Uso da API
+
+Após iniciar o servidor, a API estará disponível em `http://localhost:3333`.
+
+---
+
+### 🔐 1. Criar um Usuário
+
+**Endpoint**
+
+`POST /usuarios`
+
+**Corpo da requisição**
+
+```json
+{
+  "cpf": "12345678910",
+  "name": "Eduardo Kroth",
+  "email": "eduardo@kroth.com"
+}
+```
+
+### 🔎 2. Consultar Usuário por CPF
+
+**Endpoint**
+
+`GET /usuarios/:cpf`
+
+### ✏️ 3. Atualizar Usuário
+
+**Endpoint**
+
+`PUT /usuarios/:cpf`
+
+**Corpo da requisição**
+
+```json
+{
+  "cpf": "12345678910",
+  "name": "Eduardo Voigt Kroth",
+  "email": "eduardo.kroth@email.com"
+}
+```
+
+### 🗑️ 4. Deletar Usuário
+
+**Endpoint**
+
+`DELETE /usuarios/:cpf`.
+
+
+---
+
+### 🏛️ 5. Criar Instituição
+
+**Endpoint**
+
+`POST /instituicao`
+
+**Corpo da requisição**
+
+```json
+{
+  "name": "Itau",
+  "type": "Banco"
+}
+```
+
+### 🗑️ 6. Deletar Instituição
+
+**Endpoint**
+
+`DELETE /instituicao/:id`
+
+---
+
+### 💳 7. Criar Conta para Usuário
+
+**Endpoint**
+
+`POST /usuarios/:cpf/contas`
+
+**Corpo da requisição**
+
+```json
+{
+  "institution_name": "Banco do Brasil",
+  "type": "Banco"
+}
+```
+
+### 🔎 8. Consultar Contas de Usuário por Instituição
+
+**Endpoint**
+
+`GET /usuarios/:cpf/contas?instituicao=`
+
+**Parâmetros de consulta**
+
+- `instituicao=` - Nome da instituição.
+
+**Exemplo:**
+
+`GET /usuarios/:cpf/contas?instituicao=Banrisul`
+
+---
+
+### 💸 9. Realizar Transação
+
+**Endpoint**
+
+`POST /usuarios/:cpf/transacoes`
+
+`:cpf` - e o cpf de origem
+
+**Corpo da requisição para transferencia**
+
+```json
+{
+  "type": "transferencia",
+  "amount": 1,
+  "destination_cpf": "12345678910",
+  "institution_name_origin": "Banco do Brasil",
+  "institution_name": "Banrisul"
+}
+```
+**Corpo da requisição para saque**
+
+```json
+{
+  "type": "saque",
+  "amount": 50,
+  "institution_name_origin": "Itau"
+}
+```
+
+**Corpo da requisição para deposito**
+
+```json
+{
+  "type": "deposito",
+  "amount": 100,
+  "institution_name_origin": "Banrisul"
+}
+```
+
+### 📄 10. Consultar Extrato de Transações
+
+**Endpoint com filtro de instituicao**
+
+`GET /usuarios/:cpf/extrato?instituicao=` 
+
+**Endpoint sem filtro de instituicao**
+
+`GET /usuarios/:cpf/extrato` 
+
+### 💰 11. Consultar Saldo de Usuário
+
+**Endpoint**
+
+`GET /usuarios/:cpf/saldo?instituicao=`
+
+**Endpoint com filtro de instituicao**
+
+`GET /usuarios/:cpf/saldo?instituicao=` 
+
+**Endpoint sem filtro de instituicao**
+
+`GET /usuarios/:cpf/saldo` 
