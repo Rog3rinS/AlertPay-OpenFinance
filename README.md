@@ -51,14 +51,14 @@ Permite a comunicação entre todos os serviços do ecossistema.
 ```bash
 cd open-finance
 docker network create openfinance-net
-docker-compose up --build -d
+docker-compose up --build
 ```
 
 ### 2. Iniciar o backend
 
 ```bash
 cd ../AlertPay-Backend
-docker-compose up --build -d
+docker-compose up --build
 ```
 
 ### 3. Iniciar o frontend
@@ -68,6 +68,8 @@ cd ../AlertPay-NewProject-Front
 npm install
 npm run dev
 ```
+
+Obs: caso de algum erro no `wait-for.sh ou no start.sh` mude no canto inferior do seu VSCODE de CRLF para LF e salve, apos isso execute novamente. 
 
 ### Acessos
 
