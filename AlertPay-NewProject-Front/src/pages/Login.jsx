@@ -56,7 +56,6 @@ const Login = () => {
             <FaUser className='icon' />
           </div>
           <div className='input-field'>
-            {/* Usar o tipo de input baseado no estado showPassword */}
             <input
               type={showPassword ? 'text' : 'password'}
               placeholder='Senha'
@@ -64,18 +63,18 @@ const Login = () => {
               onChange={onChange}
               value={values.password}
             />
-            {/* Ícone de olho que alterna a visibilidade */}
+           
             {showPassword ? (
               <FaEyeSlash className='icon password-toggle' onClick={togglePasswordVisibility} />
             ) : (
               <FaEye className='icon password-toggle' onClick={togglePasswordVisibility} />
             )}
-            <FaLock className='icon' style={{ zIndex: 1 }} /> {/* Garante que o cadeado esteja por cima do olho se houver sobreposição */}
+            <FaLock className='icon' style={{ zIndex: 1 }} /> 
           </div>
           {error && <p className="error-message" style={{ color: 'red', textAlign: 'center', marginBottom: '10px' }}>{error}</p>}
           <div className="recall-forget">
             <label><input type="checkbox" />Lembre de mim</label>
-            <a href="#">Esqueci a senha</a>
+            <Link to="/esqueci-a-senha">Esqueci a senha</Link>
           </div>
           <button type="submit">Entrar</button>
           <div className="signup-link">
