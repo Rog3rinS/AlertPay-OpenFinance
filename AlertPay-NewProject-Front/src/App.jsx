@@ -42,6 +42,8 @@ function App() {
           path="/login-banco"
           element={<LoginBancoPage />}
         />
+         <Route path="/settings" 
+         element={<SettingsPage />} />
       </Route>
     </Routes>
   );

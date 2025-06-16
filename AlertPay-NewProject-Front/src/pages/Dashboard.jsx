@@ -211,6 +211,10 @@ function Dashboard({ onLogout }) {
               <FaPlus />
               <span>Nova Fatura</span>
             </button>
+             <button className="btn btn-secondary" onClick={() => navigate('/settings')}>
+          <FaCog />
+          <span>Configurações</span>
+        </button>
             <button className="btn btn-secondary" onClick={onLogout}>
               Logout
             </button>
