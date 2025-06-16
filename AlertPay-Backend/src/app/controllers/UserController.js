@@ -35,11 +35,43 @@ class UserController {
 		return res.status(201).json({ cpf, name, email, phone });
 	}
 
+	async updatePasswordByEmail(req, res) {
+		const schema = Yup.object().shape({
+			email: Yup.string()
+				.email('E-mail inválido')
+				.required('E-mail obrigatório'),
+			password: Yup.string()
+				.min(6, 'A nova senha deve ter no mínimo 6 caracteres')
+				.required('Nova senha obrigatória'),
+			confirmPassword: Yup.string()
+				.required('Confirmação obrigatória')
+				.oneOf([Yup.ref('password')], 'As senhas não coincidem'),
+		});
+
+		try {
+			await schema.validate(req.body, { abortEarly: false });
+		} catch (err) {
+			return res.status(400).json({ error: 'Falha na validação', messages: err.errors });
+		}
+
+		const { email, password } = req.body;
+
+		const user = await User.findOne({ where: { email } });
+
+		if (!user) {
+			return res.status(404).json({ error: 'Usuário não encontrado' });
+		}
+
+		await user.update({ password });
+
+		return res.json({ message: 'Senha atualizada com sucesso.' });
+	}
+
 	async update(req, res) {
 		const schema = Yup.object().shape({
 			name: Yup.string(),
 			email: Yup.string().email('E-mail inválido'),
-            phone: Yup.string(),
+			phone: Yup.string(),
 			oldPassword: Yup.string().min(6, 'A senha antiga deve ter no mínimo 6 caracteres'),
 			password: Yup.string()
 				.min(6, 'A nova senha deve ter no mínimo 6 caracteres')

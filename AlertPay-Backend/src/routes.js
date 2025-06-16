@@ -27,6 +27,8 @@ routes.use(authMiddlewares);
 // ROTAS PROTEGIDAS (precisam do token JWT)
 // ----------------------------------------
 
+routes.put('/users', UserController.updatePasswordByEmail);
+
 routes.put('/users', UserController.update);
 // JSON ROUTE (exemplo para atualizar nome e email)
 // {
