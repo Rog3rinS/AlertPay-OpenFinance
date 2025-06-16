@@ -78,3 +78,28 @@ export const getConnectedBanks = async () => {
 	const response = await api.get('/bank-logins');
 	return response.data;
 };
+
+export const getUserNotificationRules = async () => {
+	const response = await api.get('/user-rules');
+	return response.data;
+};
+
+/**
+ * Adiciona uma nova regra de notificação para o usuário.
+ * @param {object} ruleData - Os dados da nova regra (ex: { days_before: 3, min_amount: 100, type: 'email' }).
+ * @returns {Promise<any>} - A resposta da API.
+ */
+export const addUserNotificationRule = async (ruleData) => {
+	const response = await api.post('/user-rules', ruleData);
+	return response.data;
+};
+
+/**
+ * Remove uma regra de notificação específica.
+ * @param {string} id - O ID da regra a ser removida.
+ * @returns {Promise<any>} - A resposta da API.
+ */
+export const deleteUserNotificationRule = async (id) => {
+	const response = await api.delete(`/user-rules/${id}`);
+	return response.data;
+};

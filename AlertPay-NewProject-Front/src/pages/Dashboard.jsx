@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import FaturasAPagar from '../components/dashboard/FaturasAPagar';
-import { FaPlus, FaFileInvoiceDollar, FaCheckCircle, FaCalendarAlt, FaUniversity as FaBankIcon } from 'react-icons/fa';
+import { FaPlus, FaFileInvoiceDollar, FaCheckCircle, FaCalendarAlt, FaUniversity as FaBankIcon, FaCog } from 'react-icons/fa';
 import './Dashboard.css';
 import FaturasPagas from '../components/dashboard/FaturasPagas';
 import CalendarioFaturas from '../components/dashboard/CalendarioFaturas';
@@ -211,10 +211,10 @@ function Dashboard({ onLogout }) {
               <FaPlus />
               <span>Nova Fatura</span>
             </button>
-             <button className="btn btn-secondary" onClick={() => navigate('/settings')}>
-          <FaCog />
-          <span>Configurações</span>
-        </button>
+            <button className="btn btn-secondary" onClick={() => navigate('/settings')}>
+              <FaCog />
+              <span>Configurações</span>
+            </button>
             <button className="btn btn-secondary" onClick={onLogout}>
               Logout
             </button>

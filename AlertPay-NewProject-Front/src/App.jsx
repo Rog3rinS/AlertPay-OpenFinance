@@ -9,6 +9,7 @@ import AdicionarFaturaPage from './pages/AdicionarFaturasPage';
 import LoginBancoPage from './pages/LoginBancoPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 //import './App.css'; 
+import SettingsPage from './pages/SettingsPage';
 
 function App() {
 
@@ -42,8 +43,8 @@ function App() {
           path="/login-banco"
           element={<LoginBancoPage />}
         />
-         <Route path="/settings" 
-         element={<SettingsPage />} />
+        <Route path="/settings"
+          element={<SettingsPage />} />
       </Route>
     </Routes>
   );
